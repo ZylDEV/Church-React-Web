@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Web Gereja
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi web profil gereja yang dibangun dengan **React 19** dan **Tailwind CSS**, menggunakan **Firebase** dan **Supabase** sebagai backend services.
 
-## Available Scripts
+## Fitur
 
-In the project directory, you can run:
+### Halaman Publik
+- **Beranda** — Halaman utama dengan intro, info cards, foto rayon/kegiatan, dan media sosial
+- **Ruang Informasi** — Informasi dan pengumuman gereja
+- **Jadwal Ibadah** — Jadwal ibadah mingguan
+- **Sidang Jemaat** — Data sidang jemaat
+- **Informasi Keuangan** — Laporan keuangan gereja
+- **Renungan Mingguan** — Renungan rohani mingguan
+- **Dokumentasi** — Dokumentasi foto kegiatan
+- **Halaman Detail** — Halaman dinamis untuk konten informasi detail (`/informasi/:slug`)
 
-### `npm start`
+### Admin Dashboard (`/dashboard`)
+Dashboard terproteksi untuk mengelola konten website, meliputi CRUD untuk:
+- Informasi
+- Jadwal Ibadah
+- Sidang Jemaat
+- Keuangan
+- Renungan Mingguan
+- Dokumentasi
+- Foto Carousel
+- Struktur Organisasi
+- **Analisis Data** — Visualisasi data menggunakan Recharts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Teknologi
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Kategori | Teknologi |
+|----------|-----------|
+| **Framework** | React 19 |
+| **Routing** | React Router 7 |
+| **Styling** | Tailwind CSS 3, PostCSS, Autoprefixer |
+| **Animasi** | Framer Motion, Swiper |
+| **Backend** | Firebase (Auth, Hosting) |
+| **Database** | Supabase (PostgreSQL) |
+| **Charts** | Recharts |
+| **Icons** | Lucide React, React Icons |
+| **Export** | SheetJS (xlsx), FileSaver |
+| **Date** | date-fns, react-datepicker |
 
-### `npm test`
+## Prasyarat
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 18+ 
+- npm 9+
 
-### `npm run build`
+## Instalasi
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Konfigurasi Environment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Buat file `.env` di root project:
 
-### `npm run eject`
+```env
+REACT_APP_FIREBASE_API_KEY=your_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Scripts
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start        # Jalankan di mode development (http://localhost:3000)
+npm run build    # Build untuk production ke folder build/
+npm test         # Jalankan test runner
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Deployment
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Project ini di-deploy menggunakan **Firebase Hosting**. Untuk deploy:
 
-## Learn More
+```bash
+npm run build
+firebase deploy
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Konfigurasi hosting ada di `firebase.json` dan project default adalah `web-gereja-2249d`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Struktur Folder
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+src/
+├── components/
+│   ├── common/        # Komponen umum (CardSection, Modal)
+│   ├── homepage/      # Komponen halaman beranda
+│   └── TabelData/     # Komponen tabel & modal admin CRUD
+├── config/
+│   ├── firebaseConfig.jsx
+│   └── supabaseClient.jsx
+├── data/
+│   ├── konten/        # Halaman konten publik
+│   └── informasiDetailData.js
+├── pages/
+│   ├── HomePage.jsx
+│   ├── AdminDashboard.jsx
+│   └── InformasiDetail.jsx
+├── routes/
+│   └── ProtectedRoute.jsx
+├── App.js
+├── index.js
+└── index.css
+```
